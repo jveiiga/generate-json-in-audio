@@ -1,0 +1,23 @@
+.audio-list {
+    margin-top: 20px;
+}
+
+.audio-item {
+    margin: 5px 0;
+}
+
+.play-button,
+.pause-button,
+.download-button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+    margin-left: 10px;
+}
+
+.play-button:hover,
+.pause-button:hover,
+.download-button:hover {
+    text-decoration: none;
+}
+

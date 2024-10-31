@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar Áudio a partir de JSON</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+    <h1>Gerar Áudio a partir de JSON</h1>
+    <div class="audio-list" id="audioList"></div>
+
+    <script src="scripts/script.js"></script>
+</body>
+
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar Áudio a partir de JSON</title>
+</head>
+
+<body>
+    <h1>Gerar Áudio a partir de JSON</h1>
+    <button id="gerarAudioBtn">Gerar Áudio</button>
+
+    <script>
+        // Função para gerar áudio
+        function gerarAudio(audiosComDelay) {
+            let currentIndex = 0; // Índice atual para rastrear qual áudio está sendo reproduzido
+
+            function playNextAudio() {
+                if (currentIndex < audiosComDelay.length) {
+                    const audio = audiosComDelay[currentIndex];
+                    const audioData = audio.data; // Supondo que 'data' contém a string base64 do áudio
+
+                    if (audioData) {
+                        const audioElement = new Audio(audioData); // Cria um novo elemento de áudio
+                        audioElement.play() // Inicia a reprodução do áudio
+                            .then(() => {
+                                console.log(`Reproduzindo: ${audio.name}`);
+                                // Aumenta o índice e chama a próxima reprodução após o delay
+                                setTimeout(() => {
+                                    currentIndex++;
+                                    playNextAudio(); // Chama para reproduzir o próximo áudio
+                                }, audio.delay || 0); // Usa o delay ou 0 se não houver
+                            })
+                            .catch(err => {
+                                console.error('Erro ao reproduzir áudio:', err);
+                            });
+                    } else {
+                        console.error('O áudio não contém dados.');
+                        currentIndex++; // Aumenta o índice se não houver dados
+                        playNextAudio(); // Chama para reproduzir o próximo áudio
+                    }
+                } else {
+                    console.log("Todos os áudios foram reproduzidos.");
+                }
+            }
+
+            playNextAudio(); // Inicia a reprodução do primeiro áudio
+        }
+
+
+        // Função para carregar o JSON e gerar áudio
+        function carregarJsonEGerarAudio() {
+    fetch('dados.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao carregar o arquivo JSON');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data); // Verifique o objeto completo no console
+            if (data.audiosIndex && data.audiosIndex.length > 0) {
+                // Cria um objeto para mapear os dados de objectsList pelo ID
+                const audioDataMap = {};
+                data.objectsList.forEach(object => {
+                    if (object.data) {
+                        audioDataMap[object.id] = object.data; // Mapeia pelo ID
+                    }
+                });
+
+                // Adiciona a chave data nos objetos de audiosIndex
+                const audiosComData = data.audiosIndex.map(audio => ({
+                    ...audio,
+                    data: audioDataMap[audio.id] || null // Adiciona data, se disponível
+                }));
+
+                // Adiciona delay aos áudios conforme necessário
+                const audiosComDelay = data.funis[0].data.map((item, index) => ({
+                    ...audiosComData[index],
+                    delay: item.delay // Adiciona o delay do funil
+                }));
+
+                gerarAudio(audiosComDelay); // Passa o array de áudios para a função
+            } else {
+                console.error('Nenhum áudio encontrado no JSON.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+        });
+}
+
+
+        // Evento de clique no botão
+        document.getElementById('gerarAudioBtn').addEventListener('click', carregarJsonEGerarAudio);
+    </script>
+</body>
+
+</html> -->
